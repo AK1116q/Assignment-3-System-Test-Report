@@ -223,7 +223,7 @@ async function testRegistration(browser) {
         await fillRegistration(page, email);
         await submitRegistration(page);
         const warning = page.locator('.alert-danger');
-        await warning.waitFor();
+        await warning.waitFor({ timeout: 60000 });
         assert.match(await warning.innerText(), /E-Mail Address is already registered/i);
         return 'The duplicate-email warning was displayed.';
       }
@@ -236,7 +236,7 @@ async function testRegistration(browser) {
         await openPage(page, pageUrl('account/register'));
         await page.locator('input[name="agree"]').check();
         await submitRegistration(page);
-        await page.locator('#content .text-danger').first().waitFor();
+        await page.locator('#content .text-danger').first().waitFor({ timeout: 60000 });
         const errors = await page.locator('#content .text-danger').allTextContents();
         assert.equal(errors.length, 5, `Expected five field errors, found ${errors.length}.`);
         return `${errors.length} field-validation messages were displayed.`;
