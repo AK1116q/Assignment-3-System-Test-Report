@@ -1,0 +1,12 @@
+{
+  "name": "assignment-3-system-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright system tests for the OpenCart Abstracta demo store",
+  "scripts": {
+    "test": "node system-tests.js"
+  },
+  "dependencies": {
+    "playwright": "1.62.1"
+  }
+}
