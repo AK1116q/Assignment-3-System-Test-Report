@@ -2,7 +2,7 @@
   "name": "assignment-3-system-tests",
   "version": "1.0.0",
   "private": true,
-  "description": "Playwright system tests for the OpenCart Abstracta demo store",
+  "description": "Product comparison, category browsing, and contact form system tests",
   "scripts": {
     "test": "node system-tests.js"
   },

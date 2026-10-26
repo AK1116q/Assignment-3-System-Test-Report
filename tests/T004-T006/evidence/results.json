@@ -1,0 +1,100 @@
+{
+  "website": "https://opencart.abstracta.us",
+  "executedAt": "2026-10-26T08:59:36.051Z",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "errors": 0,
+  "results": [
+    {
+      "testCase": "T004",
+      "scenario": "S1",
+      "description": "Open an empty comparison list",
+      "expected": "The comparison page contains no product table.",
+      "actual": "The comparison page opened with no product table.",
+      "status": "PASS",
+      "screenshot": "T004-S1.png",
+      "durationMs": 2203
+    },
+    {
+      "testCase": "T004",
+      "scenario": "S2",
+      "description": "Compare iPhone with MacBook",
+      "expected": "Both products and their prices appear in one comparison table.",
+      "actual": "The table compared iPhone and MacBook with both prices.",
+      "status": "PASS",
+      "screenshot": "T004-S2.png",
+      "durationMs": 5490
+    },
+    {
+      "testCase": "T004",
+      "scenario": "S3",
+      "description": "Remove iPhone from the comparison list",
+      "expected": "MacBook remains and iPhone is no longer compared.",
+      "actual": "Only MacBook remained in the comparison table.",
+      "status": "PASS",
+      "screenshot": "T004-S3.png",
+      "durationMs": 7741
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S1",
+      "description": "Browse the Mac desktop subcategory",
+      "expected": "The Mac category displays one iMac.",
+      "actual": "The Mac category listed one iMac.",
+      "status": "PASS",
+      "screenshot": "T005-S1.png",
+      "durationMs": 2440
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S2",
+      "description": "Browse the empty PC desktop subcategory",
+      "expected": "The PC category displays no product cards.",
+      "actual": "The PC category had no product cards.",
+      "status": "PASS",
+      "screenshot": "T005-S2.png",
+      "durationMs": 2424
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S3",
+      "description": "Sort desktop products by name descending",
+      "expected": "The sorting control selects Z to A and the products appear in descending order.",
+      "actual": "12 desktop products appeared in name-descending order.",
+      "status": "PASS",
+      "screenshot": "T005-S3.png",
+      "durationMs": 4846
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S1",
+      "description": "Submit an empty contact form",
+      "expected": "The form displays name, email, and enquiry errors.",
+      "actual": "The form displayed all three required-field errors.",
+      "status": "PASS",
+      "screenshot": "T006-S1.png",
+      "durationMs": 2614
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S2",
+      "description": "Submit a contact form with an invalid email",
+      "expected": "Only the email validation error appears.",
+      "actual": "Only the invalid-email message was displayed.",
+      "status": "PASS",
+      "screenshot": "T006-S2.png",
+      "durationMs": 3065
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S3",
+      "description": "Submit a valid contact enquiry",
+      "expected": "The store redirects to its contact-success page.",
+      "actual": "The form redirected to http://opencart.abstracta.us/index.php?route=information/contact/success.",
+      "status": "PASS",
+      "screenshot": "T006-S3.png",
+      "durationMs": 4074
+    }
+  ]
+}

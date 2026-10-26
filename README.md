@@ -1,7 +1,8 @@
 # Assignment 3 System Tests
 
-This repository collects the group's system tests for the OpenCart demo store.
+This repository collects system tests for the OpenCart demo store.
 
-The `tests/T001-T003` folder contains the product search, shopping cart, and
-registration tests. Other group members can add their own tests in separate
-folders.
+The `tests/T004-T006` folder contains Product Comparison, Category Browsing,
+and Contact Us tests. See its README and TEST_CASES.md for instructions,
+scenario results, and evidence. Other group members can add their own tests
+in separate folders.
