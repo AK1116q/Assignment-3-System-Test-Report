@@ -9,10 +9,12 @@ const results = [];
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
+// Build a store URL from an OpenCart route and its query parameters.
 function pageUrl(route, parameters = {}) {
   return `${STORE_URL}/index.php?${new URLSearchParams({ route, ...parameters })}`;
 }
 
+// Retry once when the demo site does not load its main content.
 async function openPage(page, route, parameters = {}) {
   const url = pageUrl(route, parameters);
   for (let attempt = 1; attempt <= 2; attempt += 1) {
@@ -27,6 +29,7 @@ async function openPage(page, route, parameters = {}) {
   }
 }
 
+// Give each scenario a fresh session and save its status and screenshot.
 async function runScenario(browser, testCase, scenario, description, expected, action) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await context.newPage();
@@ -66,6 +69,7 @@ async function runScenario(browser, testCase, scenario, description, expected, a
   console.log(`${testCase}-${scenario}: ${status} - ${actual}`);
 }
 
+// Add a product using the Compare button on its category card.
 async function addToComparison(page, productName) {
   await openPage(page, 'product/category', { path: '20' });
   const card = page.locator('.product-thumb').filter({
@@ -85,6 +89,7 @@ async function addToComparison(page, productName) {
   assert.match(data.success, new RegExp(productName, 'i'));
 }
 
+// T004: check an empty list, compare two products, then remove one.
 async function testComparison(browser) {
   await runScenario(
     browser, 'T004', 'S1', 'Open an empty comparison list',
@@ -138,6 +143,7 @@ async function testComparison(browser) {
   );
 }
 
+// T005: check populated and empty categories, then check the sort order.
 async function testCategories(browser) {
   await runScenario(
     browser, 'T005', 'S1', 'Browse the Mac desktop subcategory',
@@ -187,6 +193,7 @@ async function testCategories(browser) {
   );
 }
 
+// Wait for the contact form submission before checking the page result.
 async function submitContact(page) {
   const submitted = page.waitForResponse((response) =>
     response.request().method() === 'POST' &&
@@ -197,6 +204,7 @@ async function submitContact(page) {
   return submitted;
 }
 
+// T006: check required fields, an invalid email, and a valid enquiry.
 async function testContact(browser) {
   await runScenario(
     browser, 'T006', 'S1', 'Submit an empty contact form',
@@ -251,6 +259,7 @@ async function testContact(browser) {
   );
 }
 
+// Run every test group unless TEST_CASE selects one group.
 async function main() {
   const tests = {
     T004: testComparison,
