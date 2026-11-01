@@ -20,6 +20,7 @@ def page_url(route, **parameters):
     return f"{STORE}/index.php?{urlencode({'route': route, **parameters})}"
 
 
+# Retry once when the demo page loads slowly.
 def open_page(driver, route, **parameters):
     url = page_url(route, **parameters)
     for attempt in range(2):
@@ -32,6 +33,7 @@ def open_page(driver, route, **parameters):
                 raise
 
 
+# Use a fresh headless browser for each scenario.
 def new_driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
@@ -42,6 +44,7 @@ def new_driver():
     return driver
 
 
+# Capture the full page for the result evidence.
 def screenshot(driver, path):
     height = driver.execute_script("return document.documentElement.scrollHeight")
     driver.set_window_size(1440, min(max(height + 100, 900), 3200))
@@ -49,6 +52,7 @@ def screenshot(driver, path):
     driver.save_screenshot(str(path))
 
 
+# Find a product in Desktops and add it to the comparison list.
 def add_to_comparison(driver, product_name):
     open_page(driver, "product/category", path="20")
     cards = driver.find_elements(By.CSS_SELECTOR, ".product-thumb")
@@ -62,6 +66,7 @@ def add_to_comparison(driver, product_name):
 
 
 # T004: Product Comparison
+# Check that an empty list has no comparison table.
 def t004_s1(driver):
     open_page(driver, "product/compare")
     assert driver.find_element(By.CSS_SELECTOR, "#content h1").text == "Product Comparison"
@@ -69,6 +74,7 @@ def t004_s1(driver):
     return "The comparison page opened without a product table."
 
 
+# Check that both selected products and prices appear.
 def t004_s2(driver):
     add_to_comparison(driver, "iPhone")
     add_to_comparison(driver, "MacBook")
@@ -80,6 +86,7 @@ def t004_s2(driver):
     return "iPhone and MacBook appeared with both prices."
 
 
+# Check that removing iPhone leaves MacBook in the list.
 def t004_s3(driver):
     add_to_comparison(driver, "iPhone")
     add_to_comparison(driver, "MacBook")
@@ -94,6 +101,7 @@ def t004_s3(driver):
 
 
 # T005: Category Browsing
+# Check the populated Mac category.
 def t005_s1(driver):
     open_page(driver, "product/category", path="20_27")
     assert driver.find_element(By.CSS_SELECTOR, "#content h2").text == "Mac"
@@ -102,6 +110,7 @@ def t005_s1(driver):
     return "The Mac category listed one iMac."
 
 
+# Check the empty PC category.
 def t005_s2(driver):
     open_page(driver, "product/category", path="20_26")
     assert driver.find_element(By.CSS_SELECTOR, "#content h2").text == "PC"
@@ -109,6 +118,7 @@ def t005_s2(driver):
     return "The PC category had no product cards."
 
 
+# Check the selected sort option and product order.
 def t005_s3(driver):
     open_page(driver, "product/category", path="20")
     Select(driver.find_element(By.ID, "input-sort")).select_by_visible_text("Name (Z - A)")
@@ -120,16 +130,19 @@ def t005_s3(driver):
     return f"{len(names)} desktop products appeared in name-descending order."
 
 
+# Submit the Contact Us form.
 def submit_contact(driver):
     driver.find_element(By.CSS_SELECTOR, '#content input[type="submit"]').click()
 
 
+# Collect the validation messages after submission.
 def contact_errors(driver):
     WebDriverWait(driver, 20).until(lambda page: page.find_elements(By.CSS_SELECTOR, "#content .text-danger"))
     return [item.text for item in driver.find_elements(By.CSS_SELECTOR, "#content .text-danger")]
 
 
 # T006: Contact Us
+# Check the errors for all empty required fields.
 def t006_s1(driver):
     open_page(driver, "information/contact")
     submit_contact(driver)
@@ -141,6 +154,7 @@ def t006_s1(driver):
     return "The form displayed all three required-field errors."
 
 
+# Check that an invalid email shows only its own error.
 def t006_s2(driver):
     open_page(driver, "information/contact")
     driver.find_element(By.ID, "input-name").send_keys("Test Student")
@@ -152,6 +166,7 @@ def t006_s2(driver):
     return "Only the invalid-email message was displayed."
 
 
+# Check that valid details reach the success page.
 def t006_s3(driver):
     open_page(driver, "information/contact")
     driver.find_element(By.ID, "input-name").send_keys("Test Student")
@@ -183,6 +198,7 @@ CASES = {
 }
 
 
+# Run one requested case, or all three cases by default.
 def main():
     selected = sys.argv[1] if len(sys.argv) > 1 else None
     if selected and selected not in CASES:
