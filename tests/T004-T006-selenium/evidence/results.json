@@ -1,0 +1,82 @@
+{
+  "website": "https://opencart.abstracta.us",
+  "executedAt": "2026-11-01T08:00:11.078432+00:00",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "errors": 0,
+  "results": [
+    {
+      "testCase": "T004",
+      "scenario": "S1",
+      "expected": "No product table is displayed.",
+      "actual": "The comparison page opened without a product table.",
+      "status": "PASS",
+      "screenshot": "T004-S1.png"
+    },
+    {
+      "testCase": "T004",
+      "scenario": "S2",
+      "expected": "Both products and prices appear in one comparison table.",
+      "actual": "iPhone and MacBook appeared with both prices.",
+      "status": "PASS",
+      "screenshot": "T004-S2.png"
+    },
+    {
+      "testCase": "T004",
+      "scenario": "S3",
+      "expected": "Removing iPhone leaves MacBook in the table.",
+      "actual": "Only MacBook remained in the comparison table.",
+      "status": "PASS",
+      "screenshot": "T004-S3.png"
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S1",
+      "expected": "The Mac category displays one iMac.",
+      "actual": "The Mac category listed one iMac.",
+      "status": "PASS",
+      "screenshot": "T005-S1.png"
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S2",
+      "expected": "The PC category displays no product cards.",
+      "actual": "The PC category had no product cards.",
+      "status": "PASS",
+      "screenshot": "T005-S2.png"
+    },
+    {
+      "testCase": "T005",
+      "scenario": "S3",
+      "expected": "The desktop products appear in descending name order.",
+      "actual": "12 desktop products appeared in name-descending order.",
+      "status": "PASS",
+      "screenshot": "T005-S3.png"
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S1",
+      "expected": "The empty form shows three validation errors.",
+      "actual": "The form displayed all three required-field errors.",
+      "status": "PASS",
+      "screenshot": "T006-S1.png"
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S2",
+      "expected": "Only the invalid-email error appears.",
+      "actual": "Only the invalid-email message was displayed.",
+      "status": "PASS",
+      "screenshot": "T006-S2.png"
+    },
+    {
+      "testCase": "T006",
+      "scenario": "S3",
+      "expected": "A valid enquiry reaches the contact-success page.",
+      "actual": "The form reached the contact-success page.",
+      "status": "PASS",
+      "screenshot": "T006-S3.png"
+    }
+  ]
+}
